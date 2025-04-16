@@ -10,7 +10,7 @@ class ShipmentsData
     /** @var string */
     private $lastTracingState;
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'waybillNumber' => $this->waybillNumber,

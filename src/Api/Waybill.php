@@ -16,7 +16,7 @@ class Waybill
     /** @var WaybillData */
     private $data;
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'printFormat' => $this->printFormat,

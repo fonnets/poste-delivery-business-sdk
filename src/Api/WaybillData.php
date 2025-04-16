@@ -19,25 +19,35 @@ class WaybillData
     /** @var WaybillDataContact */
     private $receiver;
 
-    public function toArray()
+    /** @var WaybillDataInternational */
+    private $international;
+
+    public function toArray(): array
     {
         $declaredArr = array();
-        foreach($this->declared as $declaredObj) {
-            array_push($declaredArr, $declaredObj->toArray());
+        /** @var WaybillDataDeclared $declaredObj */
+        foreach ($this->declared as $declaredObj) {
+            $declaredArr[] = $declaredObj->toArray(!!$this->international);
         }
-        return [
+
+        $result = [
             'declared' => $declaredArr,
             'content' => $this->content,
             'services' => $this->services->toArray(),
             'sender' => $this->sender->toArray(),
             'receiver' => $this->receiver->toArray()
         ];
+        
+        if ($this->international)
+            $result['international'] = $this->international->toArray();
+
+        return $result;
     }
 
 
     /**
      * Get the value of declared
-     */ 
+     */
     public function getDeclared()
     {
         return $this->declared;
@@ -47,7 +57,7 @@ class WaybillData
      * Set the value of declared
      *
      * @return  self
-     */ 
+     */
     public function setDeclared($declared)
     {
         $this->declared = $declared;
@@ -57,7 +67,7 @@ class WaybillData
 
     /**
      * Get the value of content
-     */ 
+     */
     public function getContent()
     {
         return $this->content;
@@ -67,7 +77,7 @@ class WaybillData
      * Set the value of content
      *
      * @return  self
-     */ 
+     */
     public function setContent($content)
     {
         $this->content = $content;
@@ -77,7 +87,7 @@ class WaybillData
 
     /**
      * Get the value of services
-     */ 
+     */
     public function getServices()
     {
         return $this->services;
@@ -87,7 +97,7 @@ class WaybillData
      * Set the value of services
      *
      * @return  self
-     */ 
+     */
     public function setServices($services)
     {
         $this->services = $services;
@@ -97,7 +107,7 @@ class WaybillData
 
     /**
      * Get the value of sender
-     */ 
+     */
     public function getSender()
     {
         return $this->sender;
@@ -107,7 +117,7 @@ class WaybillData
      * Set the value of sender
      *
      * @return  self
-     */ 
+     */
     public function setSender($sender)
     {
         $this->sender = $sender;
@@ -117,7 +127,7 @@ class WaybillData
 
     /**
      * Get the value of receiver
-     */ 
+     */
     public function getReceiver()
     {
         return $this->receiver;
@@ -127,7 +137,7 @@ class WaybillData
      * Set the value of receiver
      *
      * @return  self
-     */ 
+     */
     public function setReceiver($receiver)
     {
         $this->receiver = $receiver;
@@ -135,4 +145,13 @@ class WaybillData
         return $this;
     }
 
+    public function getInternational()
+    {
+        return $this->international;
+    }
+
+    public function setInternational($international)
+    {
+        $this->international = $international;
+    }
 }

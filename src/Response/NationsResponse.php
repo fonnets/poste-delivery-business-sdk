@@ -12,26 +12,27 @@ class NationsResponse extends BaseResponse
 
     public function __construct($response)
     {
+        parent::__construct($response);
         foreach ($response as $key => $value) {
             if (property_exists($this, $key)) {
                 switch ($key) {
                     case 'countries':
-                        foreach($value as $arrvalue) {
-                            $value = array();
-
+                        $countries = [];
+                        foreach ($value as $arrvalue) {
                             $country = new Country(
                                 $arrvalue->iso4,
                                 $arrvalue->iso2,
                                 $arrvalue->active,
                                 $arrvalue->name,
-                                isset($arrvalue->intName)?$arrvalue->intName:null,
+                                $arrvalue->intName ?? null,
                                 $arrvalue->extraue,
                                 $arrvalue->states,
-                                isset($arrvalue->news)?$arrvalue->news:null,
+                                $arrvalue->news ?? null,
                                 $arrvalue->products
                             );
-                            array_push($value, $country);
+                            $countries[] = $country;
                         }
+                        $value = $countries;
                         break;
                     case 'result':
                         $value = new Result(
@@ -51,8 +52,8 @@ class NationsResponse extends BaseResponse
      * Get the value of countries
      *
      * @return  array
-     */ 
-    public function getCountries()
+     */
+    public function getCountries(): array
     {
         return $this->countries;
     }
@@ -60,11 +61,11 @@ class NationsResponse extends BaseResponse
     /**
      * Set the value of countries
      *
-     * @param  array  $countries
+     * @param array $countries
      *
      * @return  self
-     */ 
-    public function setCountries(array $countries)
+     */
+    public function setCountries(array $countries): NationsResponse
     {
         $this->countries = $countries;
 

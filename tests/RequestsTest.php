@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use DateTime;
+use DateTimeZone;
 use Dinja\PosteDeliveryBusinessSDK\Request\WaybillRequest;
 
 use Dinja\PosteDeliveryBusinessSDK\Api\Waybill;
@@ -33,8 +35,8 @@ class RequestsTest extends TestCase
 
     private function buildRequest()
     {
-        $timestamp = new \DateTime();
-		$timezone = new \DateTimeZone('Europe/Rome');
+        $timestamp = new DateTime();
+		$timezone = new DateTimeZone('Europe/Rome');
 		$timestamp->setTimezone($timezone);
 
         $waybillDataReceiver = new WaybillDataContact();
@@ -74,7 +76,7 @@ class RequestsTest extends TestCase
             ->setHeight("1")
             ->setLength("1")
             ->setWidth("1");
-        array_push($declaredArr, $waybillDataDeclared);
+        $declaredArr[] = $waybillDataDeclared;
 
         $waybillData = new WaybillData();
         $waybillData->setDeclared($declaredArr)
@@ -91,7 +93,7 @@ class RequestsTest extends TestCase
 
         $request = new WaybillRequest(self::poste_api_client_id, self::poste_api_secret_id, self::poste_api_scope, self::debug);
         $request->setCostCenterCode(self::poste_api_cost_center_code)
-            ->setShipmentDate($timestamp->format(\DateTime::ISO8601))
+            ->setShipmentDate($timestamp->format(DateTime::ISO8601))
             ->setWaybill($waybill);
 
         return $request;

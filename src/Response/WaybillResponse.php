@@ -41,7 +41,7 @@ class WaybillResponse extends BaseResponse
                                 $arrvalue->errorCode,
                                 $arrvalue->errorDescription
                             );
-                            array_push($value, $waybill);
+                            $value[] = $waybill;
                         }
                         break;
                     case 'result':

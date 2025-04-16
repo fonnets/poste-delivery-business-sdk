@@ -46,7 +46,7 @@ class WaybillDataContact
     /** @var string */
     private $note1;
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'zipCode' => $this->zipCode,

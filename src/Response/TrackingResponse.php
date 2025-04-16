@@ -32,7 +32,7 @@ class TrackingResponse extends BaseOtherResponse
                                         $trackingvalue->officeId,
                                         $trackingvalue->status
                                     );
-                                    array_push($tracking, $trackingObj);
+                                    $tracking[] = $trackingObj;
                                 }
                             }
 
@@ -61,7 +61,7 @@ class TrackingResponse extends BaseOtherResponse
                                 $tracking
                             );
 
-                            array_push($mapping, $shipment);
+                            $mapping[] = $shipment;
                         }
                         break;
                 }

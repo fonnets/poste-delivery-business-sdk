@@ -61,7 +61,7 @@ $waybillDataDeclared->setWeight("1")
     ->setHeight("1")
     ->setLength("1")
     ->setWidth("1");
-array_push($declaredArr, $waybillDataDeclared);
+$declaredArr[] = $waybillDataDeclared;
 
 $waybillData = new Dinja\PosteDeliveryBusinessSDK\Api\WaybillData();
 $waybillData->setDeclared($declaredArr)

@@ -2,7 +2,9 @@
 
 namespace Dinja\PosteDeliveryBusinessSDK\Exception;
 
-class RequestException extends \Exception
+use Exception;
+
+class RequestException extends Exception
 {
 
 }
