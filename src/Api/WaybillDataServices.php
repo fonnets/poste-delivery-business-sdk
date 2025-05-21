@@ -19,6 +19,11 @@ class WaybillDataServices
         if(isset($this->dataWrapper))
         {
             foreach($this->dataWrapper as $serviceCode) {
+                if($serviceCode == 'APT000919' || $serviceCode == 'APT000955' || $serviceCode == 'APT000956') {
+                    $obj[$serviceCode]  = [
+                        'amount' => $this->amount
+                    ];
+                }
                 if($serviceCode == 'APT000918') {
                     $obj[$serviceCode]  = [
                         'amount' => $this->amount,
